@@ -7,14 +7,14 @@ except :
     tasks=[]
 
 def add_task():
-    task_name = input("enter the task name that you wanna add: ")
+    task_name = input("enter the task name that you wanna add? : ")
     tasks.append({"task": task_name, "done": False})
     save_tasks()  # persist the new task
     print(f"task {task_name} is added!")
 
 def view_task():
     if not tasks:
-        print("there are no tasks")
+        print("there are no tasks!")
     else:
         for i , t in enumerate(tasks):
             status = "done" if t["done"] else "pending"
@@ -26,7 +26,7 @@ def delete_task():
     else:
         print("no tasks available")
         return 
-    deleted_task= int(input("enter the num of task you want to delete"))
+    deleted_task= int(input("enter the num of task you want to delete! "))
     if 0 < deleted_task <= len(tasks):
         deleted_task -= 1
         removed_task = tasks.pop(deleted_task)
@@ -37,7 +37,7 @@ def delete_task():
 
 def mark_task_done():
     view_task()
-    mark_task= int(input("enter the task num you want to mark done"))
+    mark_task= int(input("enter the task num you want to mark done! "))
     if 0 < mark_task <= len(tasks):
         mark_task -=1
         tasks[mark_task]["done"]=True
@@ -80,4 +80,5 @@ def menu():
             print("write a valid num")
 
 if __name__ == "__main__":
+
     menu()
