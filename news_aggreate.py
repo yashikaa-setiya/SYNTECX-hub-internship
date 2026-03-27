@@ -5,10 +5,15 @@ import json
 API_KEY= "9b504c4e5b484b2a954aaa8ac4d81949"
 
 def fetch(keyword):
-    url=f"https://newsapi.org/v2/everything?q={keyword}&apikey={API_KEY}"
-    response = requests.get(url)
-    data = response.json()
-    return data["articles"]
+    url = f"https://newsapi.org/v2/everything?q={keyword}&apikey={API_KEY}"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        return data["articles"]
+    except requests.RequestException as e:
+        print(f"Error: {e}")
+        return []
 
 def save_to_json(articles):
     with open("articles.json","w") as f:
